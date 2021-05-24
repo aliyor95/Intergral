@@ -51,70 +51,6 @@ jQuery(document).ready(function () {
         }, 100);
     });
 
-    $(function () {
-        $('.gallery').magnificPopup({
-            delegate: '.popimg',
-            type: 'image',
-            gallery: {
-                enabled: true
-            }
-        });
-        $('.gallery').isotope({
-            // options
-            itemSelector: '.items'
-        });
-
-        let $gallery = $('.gallery').isotope({
-            // options
-        });
-
-        // filter items on button click
-        $('.filtering').on('click', 'span', function () {
-
-            let filterValue = $(this).attr('data-filter');
-
-            $gallery.isotope({
-                filter: filterValue
-            });
-
-        });
-
-        $('.filtering').on('click', 'span', function () {
-
-            $(this).addClass('active').siblings().removeClass('active');
-
-        });
-
-    });
-
-    // MagnificPopup
-    $(document).ready(function () {
-        $('.portfolio-container').magnificPopup({
-            type: 'image',
-            delegate: 'a',
-            gallery: {
-                enabled: true
-            }
-        });
-    });
-
-    // Porfolio isotope and filter
-    $(window).on('load', function () {
-        var portfolioIsotope = $('.portfolio-container').isotope({
-            itemSelector: '.portfolio-item'
-        });
-
-        $('#portfolio-flters li').on('click', function () {
-            $("#portfolio-flters li").removeClass('filter-active');
-            $(this).addClass('filter-active');
-
-            portfolioIsotope.isotope({
-                filter: $(this).data('filter')
-            });
-        });
-
-    });
-
     // Slick slider
     $(function () {
         $('.slick-slider').slick({
@@ -172,4 +108,102 @@ jQuery(document).ready(function () {
 
 })(jQuery);
 
-new WOW(). init();
+new WOW().init();
+
+$(document).ready(function () {
+    $(".list").click(function () {
+
+        let value = $(this).attr("data-filter");
+
+        if (value == "all") {
+            $(".items").show(1000);
+        } else {
+            $(".items").not("." + value).hide(1000);
+            $(".items").filter("." + value).show(1000);
+        }
+
+        $(".list").removeClass("active");
+        $(this).addClass("active");
+    });
+
+
+    $('.items-container').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+
+        gallery: {
+            enabled: true,
+
+            preload: [0, 2],
+
+            navigateByImgClick: true,
+
+            arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',
+
+            tPrev: 'Previous (Left arrow key)',
+            tNext: 'Next (Right arrow key)',
+            tCounter: '<span class="mfp-counter">%curr% of %total%</span>'
+        },
+
+        mainClass: 'mfp-with-zoom',
+        zoom: {
+            enabled: true,
+
+            duration: 300,
+            easing: 'ease-in-out',
+
+            opener: function (openerElement) {
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+            }
+        }
+    });
+});
+$(document).ready(function () {
+    $(".list").click(function () {
+
+        let value = $(this).attr("data-filter");
+
+        if (value == "all") {
+            $(".items").show(1000);
+        } else {
+            $(".items").not("." + value).hide(1000);
+            $(".items").filter("." + value).show(1000);
+        }
+
+        $(".list").removeClass("active");
+        $(this).addClass("active");
+    });
+
+
+    $('.items-container').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+
+        gallery: {
+            enabled: true,
+
+            preload: [0, 2],
+
+            navigateByImgClick: true,
+
+            arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',
+
+            tPrev: 'Previous (Left arrow key)',
+            tNext: 'Next (Right arrow key)',
+            tCounter: '<span class="mfp-counter">%curr% of %total%</span>'
+        },
+
+        mainClass: 'mfp-with-zoom',
+
+        zoom: {
+            enabled: true,
+
+            duration: 300,
+            easing: 'ease-in-out',
+
+            opener: function (openerElement) {
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+            }
+        }
+    });
+});
